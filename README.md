@@ -1,2 +1,2 @@
-# ecommerce-api-Project
+# Ecommerce-api-Project
 Eccomerce project based on Hexagonal Architecture and Clean Architecture. Primary language is typescript including Node Js environment and frameworks such as express, bycript, dotenv, joi, typeorm, etc...
