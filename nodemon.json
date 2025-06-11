@@ -1,0 +1,10 @@
+{
+  "watch": ["src"],
+  "ext": "js,json,ts",
+  "ignore": ["src/**/*.spec.ts", "node_modules"],
+  "execMap": {
+    "ts": "ts-node"
+  },
+  "verbose": true,
+  "restartable": "rs"
+}
