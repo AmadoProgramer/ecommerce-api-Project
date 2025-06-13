@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../../application/AuthService";
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction): void {
+  
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 

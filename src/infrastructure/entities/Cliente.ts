@@ -23,4 +23,7 @@ export class Cliente {
 
   @Column({ type: "character varying", length: 60 })
   contrasena_hash!: string;
+  
+  @Column({ type: "integer", default: 1 })
+  estado!: number; // 1: activo, 0: inactivo
 }

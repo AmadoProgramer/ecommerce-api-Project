@@ -3,7 +3,8 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 export enum EstadoPedido {
   PENDIENTE = "PENDIENTE",
   ENVIADO = "ENVIADO",
-  ENTREGADO = "ENTREGADO"
+  ENTREGADO = "ENTREGADO",
+  CANCELADO = "CANCELADO"
 }
 
 @Entity({ name: "pedido" })

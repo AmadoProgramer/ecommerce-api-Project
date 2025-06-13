@@ -57,4 +57,11 @@ export class PedidoAdapter implements PedidoPort {
     const all = await this.repository.find();
     return all.map(e => this.toDomain(e));
   }
+  async cancelPedido(id: number): Promise<boolean> {
+    const entity = await this.repository.findOne({ where: { id_pedido: id } });
+    if (!entity) throw new Error("Pedido not found");
+    entity.estado = EstadoPedido.CANCELADO;
+    await this.repository.save(entity);
+    return true;
+  }
 }

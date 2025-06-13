@@ -19,6 +19,7 @@ export class ClienteAdapter implements ClientePort {
       cedula: entity.cedula,
       direccion: entity.direccion,
       contrasena: entity.contrasena_hash,
+      estado: entity.estado || 1, // Asignar un estado por defecto si no está definido
     };
   }
 
@@ -57,7 +58,17 @@ export class ClienteAdapter implements ClientePort {
     await this.clienteRepository.remove(entity);
     return true;
   }
-
+  async getClienteByEmail(email: string): Promise<Cliente | null> {
+  
+  // Búsqueda en la base de datos
+  const entity = await this.clienteRepository.findOne({ where: { email: email.trim() } });
+  if (!entity) {
+    // No existe ningún cliente con ese correo
+    return null;
+  }
+  // Mapear a dominio y devolver
+  return this.toDomain(entity);
+}
   async getAllClientes(): Promise<Cliente[]> {
     const all = await this.clienteRepository.find();
     return all.map(this.toDomain);

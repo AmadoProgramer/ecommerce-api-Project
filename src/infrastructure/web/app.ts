@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
-import userRoutes from "../../infrastructure/routes/UserRoutes";
+//import userRoutes from "../../infrastructure/routes/UserRoutes";//
 import productoRoutes from "../../infrastructure/routes/ProductoRoutes";
 import clienteRoutes from "../../infrastructure/routes/ClienteRoutes";
 import pedidoRoutes from "../../infrastructure/routes/PedidoRoutes";
@@ -22,7 +22,7 @@ export class App {
   }
 
   private configureRoutes(): void {
-    this.app.use("/api/users", userRoutes);
+    //this.app.use("/api/users", userRoutes);
     this.app.use("/api/productos", productoRoutes);
     this.app.use("/api/clientes", clienteRoutes);
     this.app.use("/api/pedidos", pedidoRoutes);
