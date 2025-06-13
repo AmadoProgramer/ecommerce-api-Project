@@ -98,7 +98,7 @@ Authorization: Bearer <token>
 
 ## 🧪 Pruebas con Postman
 
-Puedes usar [Postman](https://www.postman.com/) para probar las siguientes rutas:
+[Postman](https://www.postman.com/) para probar las siguientes rutas:
 
 ```
 POST    /api/users/login
@@ -107,17 +107,6 @@ GET     /api/productos
 POST    /api/pedidos
 ...
 ```
-
----
-
-## 🤝 Contribución
-
-1. Haz un fork de este repositorio
-2. Crea una nueva rama: `git checkout -b feature/nueva-funcionalidad`
-3. Realiza tus cambios y haz commit: `git commit -m 'Agrega nueva funcionalidad'`
-4. Haz push a tu rama: `git push origin feature/nueva-funcionalidad`
-5. Abre un Pull Request
-
 ---
 
 ## 👨‍💻 Autor
