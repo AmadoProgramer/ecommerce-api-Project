@@ -38,23 +38,11 @@ src/
 ---
 
 ## 🔧 Configuración del entorno
+## Configuración local
+1. Copiar plantilla: `cp env.example .env`  
+2. Editar `.env` con tus credenciales (DB, JWT, etc.)  
+3. `npm install` y `npm run dev`
 
-Crea un archivo `.env` en la raíz con el siguiente contenido:
-
-```env
-PORT=4000
-
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=Nordstage2
-DB_NAME=ecommerce-api
-DB_SCHEMA=ecommerce
-
-JWT_SECRET=clave-secreta-jwt
-```
-
----
 
 ## 🛠️ Scripts disponibles
 
