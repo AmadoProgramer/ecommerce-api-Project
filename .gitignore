@@ -1,2 +1,3 @@
 node_modules/
 # No versionar el .env local con secretos
+.env
