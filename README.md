@@ -122,11 +122,12 @@ POST    /api/pedidos
 
 ## 👨‍💻 Autor
 
-**Nicolás Amado**  
+**Nicolás Amado**
+**Karen Jaimes**
 GitHub: [@AmadoProgramer](https://github.com/AmadoProgramer)
 
 ---
 
 ## 📜 Licencia
 
-Este proyecto está bajo la licencia MIT.
+Este proyecto está bajo la licencia personal
