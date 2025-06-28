@@ -14,7 +14,7 @@ export class PagoAdapter implements PagoPort {
   private toDomain(entity: PagoEntity): Pago {
     return {
       id: entity.id_pago,
-      idPedido: entity.id_pedido,
+      idPedido: entity.pedido?.id_pedido ?? 0, // <- accedemos desde la relación
       monto: parseFloat(entity.monto.toString()),
       fechaPago: entity.fecha_pago,
       metodoPago: entity.metodo_pago,
@@ -22,30 +22,47 @@ export class PagoAdapter implements PagoPort {
     };
   }
 
-  private toEntity(domain: Omit<Pago, "id_pago">): PagoEntity {
+  private toEntity(domain: Omit<Pago, "id">): PagoEntity {
     const entity = new PagoEntity();
-    entity.id_pedido = domain.idPedido;
+
+    // Asignamos solo el id del pedido como relación
+    entity.pedido = { id_pedido: domain.idPedido } as any;
+
     entity.monto = domain.monto;
+    entity.fecha_pago = domain.fechaPago;
     entity.metodo_pago = domain.metodoPago as MetodoPago;
     entity.confirmado = domain.confirmado || false;
-    entity.fecha_pago = domain.fechaPago;
+
     return entity;
   }
 
-  async createPago(data: Omit<Pago, "id_pago">): Promise<number> {
+  async createPago(data: Omit<Pago, "id">): Promise<number> {
     const saved = await this.repository.save(this.toEntity(data));
     return saved.id_pago;
   }
 
   async getPagoById(id: number): Promise<Pago | null> {
-    const entity = await this.repository.findOne({ where: { id_pago: id } });
+    const entity = await this.repository.findOne({
+      where: { id_pago: id },
+      relations: ["pedido"], // <- importante para poder acceder a `pedido.id_pedido`
+    });
     return entity ? this.toDomain(entity) : null;
   }
 
   async updatePago(id: number, data: Partial<Pago>): Promise<boolean> {
     const entity = await this.repository.findOne({ where: { id_pago: id } });
     if (!entity) throw new Error("Pago not found");
-    Object.assign(entity, data);
+
+    // Actualizamos campos uno por uno si están presentes
+    if (data.monto !== undefined) entity.monto = data.monto;
+    if (data.fechaPago !== undefined) entity.fecha_pago = data.fechaPago;
+    if (data.metodoPago !== undefined) entity.metodo_pago = data.metodoPago as MetodoPago;
+    if (data.confirmado !== undefined) entity.confirmado = data.confirmado;
+
+    if (data.idPedido !== undefined) {
+      entity.pedido = { id_pedido: data.idPedido } as any;
+    }
+
     await this.repository.save(entity);
     return true;
   }
@@ -58,7 +75,7 @@ export class PagoAdapter implements PagoPort {
   }
 
   async getAllPagos(): Promise<Pago[]> {
-    const entities = await this.repository.find();
+    const entities = await this.repository.find({ relations: ["pedido"] }); // <- para poder mapear correctamente
     return entities.map(e => this.toDomain(e));
   }
 }

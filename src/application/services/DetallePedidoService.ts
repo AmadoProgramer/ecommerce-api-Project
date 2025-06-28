@@ -1,5 +1,5 @@
-import { DetallePedido } from "../domain/detalle-pedido/DetallePedido";
-import { DetallePedidoPort } from "../domain/detalle-pedido/DetallePedidoPort";
+import { DetallePedido } from "../../domain/detalle-pedido/DetallePedido";
+import { DetallePedidoPort } from "../../domain/detalle-pedido/DetallePedidoPort";
 
 export class DetallePedidoService {
   private port: DetallePedidoPort;

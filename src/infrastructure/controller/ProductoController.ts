@@ -1,4 +1,4 @@
-import { ProductoService } from "../../application/ProductoService";
+import { ProductoService } from "../../application/services/ProductoService";
 import { Producto } from "../../domain/producto/Producto";
 import { Request, Response } from "express";
 import { Categoria } from "../../infrastructure/entities/Producto";

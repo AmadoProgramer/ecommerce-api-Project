@@ -1,6 +1,11 @@
-import { ClienteService } from "../../application/ClienteService";
-import { Cliente } from "../../domain/cliente/Cliente";
+import { ClienteService } from "../../application/services/ClienteService";
 import { Request, Response } from "express";
+import Joi from "joi";
+import {
+  ClienteCreateDto,
+  ClienteUpdateDto,
+  ClienteResponseDto,
+} from "../../application/dtos/cliente";
 
 export class ClienteController {
   private app: ClienteService;
@@ -12,73 +17,51 @@ export class ClienteController {
   async login(req: Request, res: Response): Promise<Response> {
     try {
       const { email, contrasena } = req.body;
-      // Validaciones básicas
-      console.log("Login request received:", { email, contrasena });
       if (!email || !contrasena) {
-        return res
-          .status(400)
-          .json({ error: "Email y contraseña son requeridos" });
-      }
-      if (
-        !/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email.trim())
-      ) {
-        return res
-          .status(400)
-          .json({ error: "Correo electrónico no válido" });
+        return res.status(400).json({ error: "Email y contraseña son requeridos" });
       }
 
-      // Delego toda la lógica de autenticación al servicio
       const token = await this.app.login(email.trim(), contrasena.trim());
       return res.status(200).json({ token });
     } catch (err) {
-      // Si tira “Credenciales incorrectas” devolvemos 401,
-      // otro tipo de error → 500
       const msg = err instanceof Error ? err.message : String(err);
       if (msg === "Credenciales incorrectas") {
         return res.status(401).json({ error: msg });
       }
-      return res
-        .status(500)
-        .json({ error: "Error en el servidor", details: msg });
+      return res.status(500).json({ error: "Error en el servidor", details: msg });
     }
   }
 
-  async createCliente(req: Request, res: Response): Promise<Response> {
+  async register(req: Request, res: Response): Promise<Response> {
     try {
-      const { nombre, email, contrasena, telefono, cedula, direccion, estado } = req.body;
+      const schema = Joi.object({
+        nombre: Joi.string().min(2).required(),
+        email: Joi.string().email().required(),
+        contrasena: Joi.string().min(8).required(),
+        telefono: Joi.string().pattern(/^[0-9]{7,15}$/).required(),
+        cedula: Joi.string().length(10).pattern(/^[0-9]+$/).required(),
+        direccion: Joi.string().min(5).required(),
+      });
 
-      // Validaciones básicas
-      if (!nombre || !/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre.trim())) {
-        return res.status(400).json({ error: "Nombre inválido" });
+      const { error, value } = schema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ error: error.details[0].message });
       }
 
-      if (!email || !/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email.trim())) {
-        return res.status(400).json({ error: "Correo electrónico no válido" });
-      }
+      const cliente = await this.app.register(value as ClienteCreateDto);
+      const response: ClienteResponseDto = {
+        id: cliente.id,
+        nombre: cliente.nombre,
+        email: cliente.email,
+        telefono: cliente.telefono,
+        cedula: cliente.cedula,
+        direccion: cliente.direccion,
+        estado: cliente.estado,
+      };
 
-      if (!telefono || !/^\d{7,15}$/.test(telefono.trim())) {
-        return res.status(400).json({ error: "Teléfono inválido (mín. 7 dígitos)" });
-      }
-      if (
-        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,25}$/.test(
-          contrasena.trim()
-        )
-      )
-        return res.status(400).json({
-          error:
-            "La contraseña debe tener al menos 6 caracteres y máximo 25, incluyendo al menos una letra y un número",
-        });
-        if (!cedula || !/^\d{10}$/.test(cedula.trim()))
-        return res.status(400).json({ error: "Cédula inválida (10 dígitos)" });
-        if (!direccion || direccion.trim().length < 5) {
-        return res.status(400).json({ error: "Dirección inválida (mín. 5 caracteres)" });
-        }
-
-      const cliente: Omit<Cliente, "id"> = { nombre, email, contrasena, telefono, cedula, direccion, estado: 1 };
-      const idCliente = await this.app.createCliente(cliente);
-      return res.status(201).json({ message: "Cliente creado con éxito", idCliente });
-    } catch (error) {
-      return res.status(500).json({ error: "Error en el servidor", details: error instanceof Error ? error.message : error });
+      return res.status(201).json({ message: "Cliente registrado", cliente: response });
+    } catch (err) {
+      return res.status(500).json({ error: "Error en el servidor", details: err instanceof Error ? err.message : err });
     }
   }
 
@@ -108,22 +91,21 @@ export class ClienteController {
       const id = parseInt(req.params.id);
       if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
 
-      const { nombre, email, telefono, estado } = req.body;
+      const schema = Joi.object({
+        nombre: Joi.string().min(2),
+        email: Joi.string().email(),
+        telefono: Joi.string().pattern(/^[0-9]{7,15}$/),
+        direccion: Joi.string().min(5),
+        estado: Joi.number().valid(0, 1),
+        contrasena: Joi.string().min(8),
+      });
 
-      // Validaciones
-      if (nombre && !/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/.test(nombre.trim())) {
-        return res.status(400).json({ error: "Nombre inválido" });
+      const { error, value } = schema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ error: error.details[0].message });
       }
 
-      if (email && !/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email.trim())) {
-        return res.status(400).json({ error: "Correo electrónico no válido" });
-      }
-
-      if (telefono && !/^\d{7,15}$/.test(telefono.trim())) {
-        return res.status(400).json({ error: "Teléfono inválido" });
-      }
-
-      const updated = await this.app.updateCliente(id, { nombre, email, telefono, estado });
+      const updated = await this.app.updateCliente(id, value as ClienteUpdateDto);
       if (!updated) return res.status(404).json({ error: "Cliente no encontrado o sin cambios" });
       return res.status(200).json({ message: "Cliente actualizado con éxito" });
     } catch (error) {
@@ -142,5 +124,5 @@ export class ClienteController {
       return res.status(500).json({ error: "Error al eliminar cliente", details: error instanceof Error ? error.message : error });
     }
   }
-
 }
+

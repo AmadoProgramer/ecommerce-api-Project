@@ -1,5 +1,5 @@
-import { Proveedor } from "../domain/proveedor/Proveedor";
-import { ProveedorPort } from "../domain/proveedor/ProveedorPort";
+import { Proveedor } from "../../domain/proveedor/Proveedor";
+import { ProveedorPort } from "../../domain/proveedor/ProveedorPort";
 
 export class ProveedorService {
   constructor(private readonly port: ProveedorPort) {}

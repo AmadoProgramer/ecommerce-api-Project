@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ProveedorAdapter } from '../adapter/ProveedorAdapter';
-import { ProveedorService } from '../../application/ProveedorService';
+import { ProveedorService } from '../../application/services/ProveedorService';
 import { ProveedorController } from '../controller/ProveedorController';
 import { authenticateToken } from '../web/authMiddleware';
 

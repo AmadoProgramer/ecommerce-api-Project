@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { PedidoAdapter } from '../adapter/PedidoAdapter';
-import { PedidoService } from '../../application/PedidoService';
+import { PedidoService } from '../../application/services/PedidoService';
 import { PedidoController } from '../controller/PedidoController';
 import { authenticateToken } from '../web/authMiddleware';
 

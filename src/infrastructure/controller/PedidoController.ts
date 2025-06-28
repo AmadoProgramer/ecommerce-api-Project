@@ -1,4 +1,4 @@
-import { PedidoService } from "../../application/PedidoService";
+import { PedidoService } from "../../application/services/PedidoService";
 import { Request, Response } from "express";
 
 export class PedidoController {

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { DetallePedidoAdapter } from '../adapter/DetallePedidoAdapter';
-import { DetallePedidoService } from '../../application/DetallePedidoService';
+import { DetallePedidoService } from '../../application/services/DetallePedidoService';
 import { DetallePedidoController } from '../controller/DetallePedidoController';
 import { authenticateToken } from '../web/authMiddleware';
 

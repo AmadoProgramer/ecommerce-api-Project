@@ -12,7 +12,6 @@ import { Producto } from "../entities/Producto";
 import { Pedido } from "../entities/Pedido";
 import { DetallePedido } from "../entities/DetallePedido";
 import { Pago } from "../entities/Pago";
-import { Proveedor } from '../../domain/proveedor/Proveedor';
 import { StockEntity } from "../entities/Stock";
 import { ProveedorEntity } from "../entities/Proveedor";
 

@@ -1,7 +1,7 @@
 // ProductoRoutes.ts (temporal)
 import { Router } from 'express';
 import { ProductoAdapter } from '../adapter/ProductoAdapter';
-import { ProductoService } from '../../application/ProductoService';
+import { ProductoService } from '../../application/services/ProductoService';
 import { ProductoController } from '../controller/ProductoController';
 import { authenticateToken } from '../web/authMiddleware';
 

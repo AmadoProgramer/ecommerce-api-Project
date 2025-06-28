@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { PagoAdapter } from '../adapter/PagoAdapter';
-import { PagoService } from '../../application/PagoService';
+import { PagoService } from '../../application/services/PagoService';
 import { PagoController } from '../controller/PagoController';
 import { authenticateToken } from '../web/authMiddleware';
 

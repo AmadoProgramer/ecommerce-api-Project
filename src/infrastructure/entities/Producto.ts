@@ -1,5 +1,10 @@
-// Producto.ts
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany
+} from "typeorm";
+import { DetallePedido } from "./DetallePedido";
 
 export enum Categoria {
   ROPA = "ROPA",
@@ -22,5 +27,8 @@ export class Producto {
 
   @Column({ type: "enum", enum: Categoria, default: Categoria.ROPA })
   categoria!: Categoria;
+
+  @OneToMany(() => DetallePedido, detalle => detalle.producto)
+  detalles!: DetallePedido[];
 }
 

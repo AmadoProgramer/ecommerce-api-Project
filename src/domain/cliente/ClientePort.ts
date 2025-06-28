@@ -1,10 +1,16 @@
-import { Cliente } from './Cliente';
+import {
+  ClienteCreateDto,
+  ClienteUpdateDto,
+  ClienteResponseDto,
+} from "../../application/dtos/cliente";
+import { Cliente } from "./Cliente";
 
 export interface ClientePort {
-  createCliente(cliente: Omit<Cliente, 'id'>): Promise<number>;
-  getClienteById(id: number): Promise<Cliente | null>;
-  getClienteByEmail(email: string): Promise<Cliente | null>;
-  updateCliente(id: number, cliente: Partial<Cliente>): Promise<boolean>;
+  createCliente(cliente: ClienteCreateDto): Promise<number>;
+  getClienteById(id: number): Promise<ClienteResponseDto | null>;
+  getClienteByEmail(email: string): Promise<Cliente | null>; // dominio para login
+  updateCliente(id: number, cliente: ClienteUpdateDto): Promise<boolean>;
   deleteCliente(id: number): Promise<boolean>;
-  getAllClientes(): Promise<Cliente[]>;
+  getAllClientes(): Promise<ClienteResponseDto[]>;
 }
+

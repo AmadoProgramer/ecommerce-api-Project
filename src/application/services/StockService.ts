@@ -1,5 +1,5 @@
-import { Stock } from '../domain/stock/Stock';
-import { StockPort } from '../domain/stock/StockPort';
+import { Stock } from '../../domain/stock/Stock';
+import { StockPort } from '../../domain/stock/StockPort';
 
 export class StockService {
   private port: StockPort;

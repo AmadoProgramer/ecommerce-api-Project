@@ -1,5 +1,5 @@
-import { Pago } from "../domain/pago/Pago";
-import { PagoPort } from "../domain/pago/PagoPort";
+import { Pago } from "../../domain/pago/Pago";
+import { PagoPort } from "../../domain/pago/PagoPort";
 
 export class PagoService {
   private port: PagoPort;

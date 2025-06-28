@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AuthService } from "../../application/AuthService";
+import { AuthService } from "../../application/services/AuthService";
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction): void {
   

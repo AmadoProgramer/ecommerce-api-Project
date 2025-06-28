@@ -1,6 +1,6 @@
-import { Producto } from "../domain/producto/Producto";
-import { ProductoPort } from "../domain/producto/ProductoPort";
-import { Categoria } from "../infrastructure/entities/Producto";
+import { Producto } from "../../domain/producto/Producto";
+import { ProductoPort } from "../../domain/producto/ProductoPort";
+import { Categoria } from "../../infrastructure/entities/Producto";
 
 export class ProductoService {
   private port: ProductoPort;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ProveedorService } from '../../application/ProveedorService';
+import { ProveedorService } from '../../application/services/ProveedorService';
 
 export class ProveedorController {
   constructor(private app: ProveedorService) {}

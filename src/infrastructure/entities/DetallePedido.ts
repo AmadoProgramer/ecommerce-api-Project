@@ -1,15 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { Pedido } from "./Pedido";
+import { Producto } from "./Producto";
 
 @Entity({ name: "detalle_pedido" })
 export class DetallePedido {
-
   @PrimaryGeneratedColumn()
   id_detalle!: number;
 
-  @Column({ type: "integer" })
-  id_pedido!: number;
+  @ManyToOne(() => Pedido, pedido => pedido.detalles, { eager: true })
+  @JoinColumn({ name: "id_pedido" })
+  pedido!: Pedido;
 
-  @Column({ type: "integer" })
+  @Column()
+  id_pedido!: number;
+  
+  @ManyToOne(() => Producto, producto => producto.detalles, { eager: true })
+  @JoinColumn({ name: "id_producto" })
+  producto!: Producto;
+
+  @Column()
   id_producto!: number;
 
   @Column({ type: "integer" })
@@ -18,3 +33,4 @@ export class DetallePedido {
   @Column({ type: "decimal", precision: 10, scale: 2 })
   precio_unitario!: number;
 }
+

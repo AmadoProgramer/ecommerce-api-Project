@@ -1,6 +1,6 @@
-import { Pedido } from "../domain/pedido/Pedido";
-import { PedidoPort } from "../domain/pedido/PedidoPort";
-import { EstadoPedido } from "../infrastructure/entities/Pedido";
+import { Pedido } from "../../domain/pedido/Pedido";
+import { PedidoPort } from "../../domain/pedido/PedidoPort";
+import { EstadoPedido } from "../../infrastructure/entities/Pedido";
 
 export class PedidoService {
   private port: PedidoPort;

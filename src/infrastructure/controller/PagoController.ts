@@ -1,4 +1,4 @@
-import { PagoService } from "../../application/PagoService";
+import { PagoService } from "../../application/services/PagoService";
 import { Request, Response } from "express";
 
 export class PagoController {

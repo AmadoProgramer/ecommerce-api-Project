@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { StockAdapter } from '../adapter/StockAdapter';
-import { StockService } from '../../application/StockService';
+import { StockService } from '../../application/services/StockService';
 import { StockController } from '../controller/StockController';
 import { authenticateToken } from '../web/authMiddleware';
 
