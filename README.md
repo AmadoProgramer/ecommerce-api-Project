@@ -89,8 +89,8 @@ Authorization: Bearer <token>
 [Postman](https://www.postman.com/) para probar las siguientes rutas:
 
 ```
-POST    /api/users/login
-POST    /api/users           # Registro
+POST    /api/clientes/login
+POST    /api/clientes           # Registro
 GET     /api/productos
 POST    /api/pedidos
 ...

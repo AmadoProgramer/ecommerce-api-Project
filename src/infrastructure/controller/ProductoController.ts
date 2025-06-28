@@ -13,7 +13,7 @@ export class ProductoController {
   async createProducto(req: Request, res: Response): Promise<Response> {
     const { nombre, descripcion, precio, stock, categoria } = req.body;
     try {
-      const idProducto = await this.service.createProducto({ nombre, descripcion, precio, stock, categoria });
+      const idProducto = await this.service.createProducto({ nombre, descripcion, precio, categoria });
       return res.status(201).json({ message: "Producto creado con éxito", idProducto });
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);

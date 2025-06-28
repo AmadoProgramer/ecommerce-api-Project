@@ -27,10 +27,6 @@ export class ProductoService {
       throw new Error("Categoría no válida para el producto");
     }
 
-    if (producto.stock < 0) {
-      throw new Error("El stock no puede ser negativo");
-    }
-
     return await this.port.createProducto(producto);
   }
 
@@ -67,14 +63,7 @@ export class ProductoService {
     ) {
       throw new Error("La descripción debe tener al menos 10 caracteres");
     }
-
-    if (
-      producto.stock !== undefined &&
-      (isNaN(producto.stock) || producto.stock < 0)
-    ) {
-      throw new Error("El stock debe ser mayor o igual a 0");
-    }
-
+    
     return await this.port.updateProducto(id, producto);
   }
 

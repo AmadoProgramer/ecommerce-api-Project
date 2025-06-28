@@ -6,7 +6,8 @@ import clienteRoutes from "../../infrastructure/routes/ClienteRoutes";
 import pedidoRoutes from "../../infrastructure/routes/PedidoRoutes";
 import detallePedidoRoutes from "../../infrastructure/routes/DetallePedidoRoutes";
 import pagoRoutes from "../../infrastructure/routes/PagoRoutes";
-
+import stockRoutes from "../../infrastructure/routes/StockRoutes";
+import proveedorRoutes from "../../infrastructure/routes/ProveedorRoutes";
 export class App {
   private app: Application;
 
@@ -28,6 +29,8 @@ export class App {
     this.app.use("/api/pedidos", pedidoRoutes);
     this.app.use("/api/detalles-pedido", detallePedidoRoutes);
     this.app.use("/api/pagos", pagoRoutes);
+    this.app.use("/api/stock",stockRoutes);
+    this.app.use("/api/proveedores",proveedorRoutes)
   }
 
   public getApp(): Application {

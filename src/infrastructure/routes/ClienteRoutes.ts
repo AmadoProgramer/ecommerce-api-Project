@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { ClienteAdapter } from '../adapter/ClienteAdapter';
 import { ClienteService } from '../../application/ClienteService';
 import { ClienteController } from '../controller/ClienteController';
-import { authenticateToken } from '../web/authMiddleware';
+import { authenticateToken } from '../../infrastructure/web/authMiddleware';
 
 const router = Router();
 const clienteAdapter = new ClienteAdapter();
@@ -16,5 +16,6 @@ router.get    ('/',                         async (req, res) => {await clienteCo
 router.get    ('/:id',                      async (req, res) => { await clienteController.getClienteById(req, res)});
 router.put    ('/:id', authenticateToken,   async (req, res) => {await clienteController.updateCliente(req, res)});
 router.delete ('/:id', authenticateToken,   async (req, res) => {await clienteController.deleteCliente(req, res)});
+
 
 export default router;

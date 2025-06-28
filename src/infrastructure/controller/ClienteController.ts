@@ -142,4 +142,5 @@ export class ClienteController {
       return res.status(500).json({ error: "Error al eliminar cliente", details: error instanceof Error ? error.message : error });
     }
   }
+
 }

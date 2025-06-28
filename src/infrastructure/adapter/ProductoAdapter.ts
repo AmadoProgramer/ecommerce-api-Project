@@ -17,7 +17,6 @@ export class ProductoAdapter implements ProductoPort {
       nombre: entity.nombre,
       descripcion: entity.descripcion,
       precio: entity.precio,
-      stock: entity.stock,
       categoria: entity.categoria,
     };
   }
@@ -27,7 +26,6 @@ export class ProductoAdapter implements ProductoPort {
     entity.nombre = domain.nombre;
     entity.descripcion = domain.descripcion;
     entity.precio = domain.precio;
-    entity.stock = domain.stock;
     entity.categoria = domain.categoria as Categoria;
     return entity;
   }
