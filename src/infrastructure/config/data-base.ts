@@ -12,6 +12,9 @@ import { Producto } from "../entities/Producto";
 import { Pedido } from "../entities/Pedido";
 import { DetallePedido } from "../entities/DetallePedido";
 import { Pago } from "../entities/Pago";
+import { Proveedor } from '../../domain/proveedor/Proveedor';
+import { StockEntity } from "../entities/Stock";
+import { ProveedorEntity } from "../entities/Proveedor";
 
 // Configurar TypeORM
 export const AppDataSource = new DataSource({
@@ -24,7 +27,7 @@ export const AppDataSource = new DataSource({
   schema: envs.DB_SCHEMA,
   synchronize: true, // Solo en desarrollo
   logging: true,
-  entities: [User, Cliente, Producto, Pedido, DetallePedido, Pago]
+  entities: [User, Cliente, Producto, Pedido, DetallePedido, Pago, StockEntity, ProveedorEntity]
 });
 
 // Inicialización

@@ -19,7 +19,7 @@ export class ClienteAdapter implements ClientePort {
       cedula: entity.cedula,
       direccion: entity.direccion,
       contrasena: entity.contrasena_hash,
-      estado: entity.estado || 1, // Asignar un estado por defecto si no está definido
+      estado: entity.estado || 1, 
     };
   }
 

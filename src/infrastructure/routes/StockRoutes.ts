@@ -10,7 +10,7 @@ const stockAdapter = new StockAdapter();
 const stockService = new StockService(stockAdapter);
 const stockController = new StockController(stockService);
 
-router.post   ('/', authenticateToken,    async (req, res) => { await stockController.createStock(req, res); });
+router.post   ('/',                       async (req, res) => { await stockController.createStock(req, res); });
 router.get    ('/:productoId',            async (req, res) => { await stockController.getStockByProduct(req, res); });
 router.delete ('/:id', authenticateToken, async (req, res) => { await stockController.deleteStock(req, res); });
 
