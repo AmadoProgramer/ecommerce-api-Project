@@ -1,4 +1,4 @@
-// Stock.ts
+
 import {
   Entity,
   Column,
@@ -10,7 +10,7 @@ import { Producto } from './Producto';
 import { ProveedorEntity } from './Proveedor';
 
 @Entity('stock')
-export class Stock {
+export class StockEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

@@ -4,7 +4,7 @@ import {
   Column,
   OneToMany,
 } from 'typeorm';
-import { Stock } from './Stock';
+import { StockEntity } from './Stock';
 
 @Entity('proveedor', { schema: 'ecommerce' })
 export class ProveedorEntity {
@@ -41,6 +41,6 @@ export class ProveedorEntity {
   @Column({ default: true })
   activo!: boolean;
 
-  @OneToMany(() => Stock, stock => stock.proveedor)
-  stocks!: Stock[];
+  @OneToMany(() => StockEntity, stock => stock.proveedor)
+  stocks!: StockEntity[];
 }
